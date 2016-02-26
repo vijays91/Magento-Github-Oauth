@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Learn_GithubLogin>
+            <version>1.0.0</version>
+        </Learn_GithubLogin>
+    </modules>
+    
+    <frontend>
+        <routers>
+            <githublogin>
+                <use>standard</use>
+                <args>
+                    <module>Learn_GithubLogin</module>
+                    <frontName>github</frontName>
+                </args>
+            </githublogin>
+        </routers>
+        <layout>
+            <updates>
+                <githublogin>
+                    <file>learn/github_login.xml</file>
+                </githublogin>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<githublogin>
+				<use>admin</use>
+				<args>
+					<module>Learn_GithubLogin</module>
+					<frontName>githublogin</frontName>
+				</args>
+			</githublogin>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+		<layout>
+			<updates>
+				<githublogin>
+					<file>learn/github_login.xml</file>
+				</githublogin>
+			</updates>
+		</layout>	
+    </adminhtml>
+    
+    <global>
+		<rewrite>
+			<github_customer_mass_delete>
+				<from><![CDATA[#^/vjadmin/customer/massDelete#]]></from> <!-- (admin) change as your backend frontName -->
+				<to>/githublogin/customer/massDelete/</to>
+                <complete>1</complete>
+			</github_customer_mass_delete>
+		</rewrite>
+        <models>
+            <githublogin>
+                <class>Learn_GithubLogin_Model</class>
+                <resourceModel>githublogin_mysql4</resourceModel>
+            </githublogin>
+            <githublogin_mysql4>
+                <class>Learn_GithubLogin_Model_Mysql4</class>
+                <entities>
+                    <githublogin>
+                        <table>github_login_users</table>
+                    </githublogin>
+                </entities>
+            </githublogin_mysql4>
+        </models>
+        
+        <resources>
+            <githublogin_setup>
+                <setup>
+                    <module>Learn_GithubLogin</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </githublogin_setup>
+            <githublogin_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </githublogin_write>
+            <githublogin_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </githublogin_read>
+        </resources>
+        <blocks>
+            <githublogin>
+                <class>Learn_GithubLogin_Block</class>
+            </githublogin>
+        </blocks>
+        <helpers>
+            <githublogin>
+                <class>Learn_GithubLogin_Helper</class>
+            </githublogin>
+        </helpers>
+    </global>
+	
+	<default>
+		<githublogin_tab>
+			<githublogin_setting>
+				<github_enable>1</github_enable>
+				<!-- <github_client_id></github_client_id> -->
+				<!-- <github_client_secret></github_client_secret> -->
+				<!-- <github_redirect_url></github_redirect_url> -->
+			</githublogin_setting>
+		</githublogin_tab>
+	</default>
+
+</config>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <githublogin module="githublogin">
+            <title>Github Login Report</title>
+            <sort_order>71</sort_order>
+            <children>
+                <githublogin_fields module="githublogin">
+                    <title>Manage Github Report</title>
+                    <sort_order>20</sort_order>
+                    <action>githublogin/adminhtml_githublogin/</action>
+                </githublogin_fields>
+				<settings translate="title" module="githublogin">
+                    <title>General Settings</title>
+                    <action>adminhtml/system_config/edit/section/githublogin_tab</action>
+                    <sort_order>40</sort_order>
+                </settings>
+            </children>
+        </githublogin>
+    </menu>
+	<acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+			<admin>
+				<children>
+					<githublogin>
+						<title>Github Reports</title>
+						<children>
+							<githublogin_fields>
+								<title>Manage Github Report</title>
+							</githublogin_fields>
+						</children>
+					</githublogin>	
+					<system>
+						<children>
+							<config>
+								<children>
+									<githublogin_tab>
+										<title>Github Oauth Login</title>
+										<sort_order>50</sort_order>
+									</githublogin_tab>									
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

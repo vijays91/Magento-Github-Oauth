@@ -1,0 +1,28 @@
+<?php 
+$base_url = Mage::getBaseUrl();
+$myAcountUrl = $base_url."customer/account/index/";
+/* 
+    // Adminhtml Frontname in Magento
+    echo Mage::getConfig()->getNode('admin/routers/adminhtml/args/frontName'); 
+*/
+
+if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+    $customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+    $alt_title = $this->getUserAltTitle($customerId);
+    $img_src   = $this->getUserIcon($customerId);    
+    $data  = "\"<div style='position:absolute;right:235px;top:5px;'><a href='". $myAcountUrl ."'><img width='40px' height='40px' alt='". $alt_title ."' src='". $img_src ."' /></a></div>\"";
+    $data1 = "\"<div style='position:absolute;right:35%;bottom:5px;'><a href='". $myAcountUrl ."'><img width='40px' height='40px' alt='". $alt_title ."' src='". $img_src ."' /></a></div>\"";
+    ?>
+    <script type="text/javascript">
+        document.observe("dom:loaded", function() {
+            if($$(".header-minicart")[0]!= undefined) {
+                $$(".header-minicart").first().insert({ after: <?php echo $data;?> });
+            }            
+            if($$(".links")[0]!= undefined) {
+                $$(".links").first().insert({ after: <?php echo $data1;?> });
+            }
+        });
+    </script>
+<?php
+ }
+?>

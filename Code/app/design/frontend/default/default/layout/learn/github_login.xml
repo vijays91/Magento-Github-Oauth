@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">    
+    <default>
+        <reference name="before_body_end">
+           <block type="githublogin/button" name="githublogin.button" template="githublogin/github_icon_header_right.phtml" />
+        </reference>
+    </default>
+    
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="githublogin" ifconfig="githublogin_tab/githublogin_setting/github_enable">
+                <name>githublogin</name>
+                <path>github/index/account</path>
+                <label>Github Connect</label>
+                <!-- <aParams>class="githublogin" id="githublogin"</aParams> -->
+            </action>
+        </reference>
+    </customer_account>
+
+    <githublogin_index_account translate="label">
+        <label>Customer My Account Github Connect</label>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <action method="setTitle" translate="title" module="githublogin" ifconfig="githublogin_tab/githublogin_setting/github_enable">
+                <title>Github Connect</title>
+            </action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="githublogin/account" name="githublogin.details" /> <!--template="githublogin/githublogin.phtml"/>-->
+        </reference>
+        <reference name="customer_account_navigation">
+            <action method="setActive" translate="label" module="githublogin">
+                <path>github/index/account</path>
+            </action>
+        </reference>
+    </githublogin_index_account>
+</layout>
